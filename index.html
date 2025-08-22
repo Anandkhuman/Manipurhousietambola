@@ -222,13 +222,13 @@
     .page-wrapper { max-width: 1400px; margin: 0 auto; padding: 0em; position: relative; z-index: 1; width: 95%; }
     .main-header, .panel {
         background: var(--primary-surface); border: 1px solid var(--accent-primary);
-        border-radius: 8px; margin-bottom: 0.2rem;
+        border-radius: 8px; margin-bottom: 1rem;
         box-shadow: 0 0 15px rgba(0, 246, 255, 0.2), inset 0 0 8px rgba(0, 246, 255, 0.1);
         opacity: 0; transform: translateY(20px);
         padding: 1rem;
     }
     .main-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 1rem; padding: 0.8rem 1rem; text-align: center; }
-    .game-layout { display: grid; grid-template-columns: 1fr; gap: 0.2rem; }
+    .game-layout { display: grid; grid-template-columns: 1fr; gap: 1rem; }
 
     @media (min-width: 992px) {
         .game-layout {
@@ -237,7 +237,7 @@
     }
 
     .panel-title {
-        font-size: 1rem; font-weight: 700; margin-bottom: 1rem;
+        font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem;
         color: var(--accent-primary); text-align: center;
         text-shadow: 0 0 10px var(--accent-primary), 0 0 20px var(--accent-primary);
     }
@@ -268,7 +268,7 @@
         transition: background-color 0.5s ease, color 0.5s ease, text-shadow 0.5s ease, transform 0.5s ease;
     }
     .num-cell.called { background: var(--called-color); color: var(--text-dark); text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); transform: scale(1.05); }
-    .info-column { display: flex; flex-direction: column; gap: 0.2rem; }
+    .info-column { display: flex; flex-direction: column; gap: 1rem; }
     .called-numbers-list { display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: center; max-height: 120px; overflow-y: auto; padding: 0.4rem; background: var(--secondary-surface); border-radius: 4px; }
     .called-num-chip { background: var(--text-primary); color: var(--text-dark); padding: 0.2rem 0.6rem; border-radius: 15px; font-weight: 700; font-size: 0.85rem; }
     .search-container { display: flex; margin-bottom: 1rem; }
@@ -361,18 +361,18 @@
     #bookingGridContainer .ticket-view { cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
     #bookingGridContainer .ticket-view.sold { cursor: not-allowed; opacity: 0.5; }
     #bookingGridContainer .ticket-view.selected { transform: scale(1.03); box-shadow: 0 0 15px var(--called-color), inset 0 0 10px rgba(255, 242, 0, 0.2); border-color: var(--called-color); }
-    #bookingFormContainer { display: flex; flex-direction: column; gap: 0.2rem; margin-top: 0rem; }
+    #bookingFormContainer { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1rem; }
     .selection-indicator { text-align: center; font-size: 0.9rem; font-weight: 600; color: var(--called-color); padding: 0.6rem; margin-top: 1rem; border-radius: 4px; background: rgba(255, 242, 0, 0.1); border: 2px dashed var(--called-color); min-height: 40px; display: flex; align-items: center; justify-content: center; transition: border-color 0.3s ease; }
     #bookedTicketsDisplay { max-height: 80vh; overflow-y: auto; padding: 8px; border-radius: 6px; display: flex; flex-direction: column; gap: 1rem; background-color: #e0f7fa; border: 1px solid #b3e5fc; }
     .full-sheet-selector { display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; font-weight: 500; cursor: pointer; }
     .full-sheet-selector input { width: 14px; height: 14px; cursor: pointer; }
     .book-now-btn-small { background: var(--accent-primary); color: var(--text-dark); border: none; border-radius: 3px; padding: 2px 6px; font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: filter 0.2s; }
     .book-now-btn-small:hover { filter: brightness(1.2); }
-    .dashboard-view .gameSettingDiv { background: var(--primary-bg-dash); padding: 1px 0 8px 0; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); width: 95%; margin-left: 2.5%; margin-top: 0.2rem; }
+    .dashboard-view .gameSettingDiv { background: var(--primary-bg-dash); padding: 1px 0 8px 0; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); width: 95%; margin-left: 2.5%; margin-top: 1.5rem; }
     .dashboard-view .gameSettingDiv:first-child { margin-top: 1rem; }
     .dashboard-view .titleBtn { width: 100%; border: 0; padding: 10px; color: var(--light-text-dash); background: rgba(255, 255, 255, 0.05); border-radius: 6px 6px 0 0; font-weight: bold; text-align: center; font-size: 1rem; }
     .dashboard-view .clickBtn { padding: 8px; color: var(--light-text-dash); border-radius: 6px; border: 0; margin: 2px; cursor: pointer; transition: background-color 0.2s ease; font-size: 0.85rem; }
-    .dashboard-view .runBtn { width: 50%; font-weight: bold; border-radius: 6px; background: #e74c3c; color: var(--light-text-dash); margin: 5px auto; border: 0; display: block; cursor: pointer; font-size: 1.2rem; height: 40px; }
+    .dashboard-view .runBtn { width: 80%; font-weight: bold; border-radius: 6px; background: var(--accent-color-dash); color: var(--light-text-dash); margin: 10px auto; border: 0; display: block; cursor: pointer; font-size: 1.2rem; height: 50px; }
     .dashboard-view .bookFloatBtn { width: 110px; padding: 8px; border-radius: 8px; position: fixed; bottom: 10px; right: 10px; border: 0; background: var(--accent-color-dash); color: var(--light-text-dash); z-index: 10; box-shadow: 0 2px 6px rgba(0,0,0,0.4); cursor: pointer; font-size: 0.85rem; }
     .dashboard-view .actionBtn { margin: 4px; background: var(--accent-color-dash); color: var(--light-text-dash); font-weight: bold; border-radius: 4px; border: 0; cursor: pointer; transition: background-color 0.2s ease; font-size: 0.8rem; height: auto; padding: 8px 4px; flex-grow: 1; }
     .dashboard-view .actionBtn:hover { background: #16a085; }
@@ -382,7 +382,7 @@
     .dashboard-view .gameSettingTable tr { border-bottom: 2px solid var(--secondary-bg-dash); margin-bottom: 1px; padding-bottom: 1px; display: grid; grid-template-columns: 2fr 1fr; gap: 0px; align-items: center;}
     .dashboard-view .gameSettingTable1 tr { border-bottom: 2px solid var(--secondary-bg-dash); margin-bottom: 1px; padding-bottom: 1px; display: grid; grid-template-columns: 11fr 2fr; gap: 0px; align-items: center;}
 
-    .dashboard-view .gameSettingTable td { padding: 1px 0px; position: relative; border: none; font-size: 0.9rem; vertical-align: middle; }
+    .dashboard-view .gameSettingTable td { padding: 4px 0px; position: relative; border: none; font-size: 0.9rem; vertical-align: middle; }
     .dashboard-view .gameSettingTable td:first-child { font-weight: bold; color: var(--muted-color-dash); }
     .dashboard-view .gameSettingTable td::before { content: '' !important; /* Removed pseudo-element labels */ }
     .dashboard-view .tableInp {
@@ -551,6 +551,11 @@
         position: relative;
         overflow: hidden;
         transition: background-image 0.5s ease-in-out;
+    }
+    
+    #posterContent [contenteditable="true"]:hover {
+        outline: 2px dashed var(--accent-primary);
+        background-color: rgba(0, 246, 255, 0.1);
     }
 
     #posterContent::before {
@@ -806,18 +811,19 @@
         </header>
 
         <div class="panel">
-            <div class="timer-status-bar" id="booking-timer-bar" style="border-top: none; padding-top: 0; margin-bottom: 0.4rem;">
+            <div class="timer-status-bar" id="booking-timer-bar" style="border-top: none; padding-top: 0; margin-bottom: 1rem;">
             </div>
         </div>
 
         <section class="panel">
-            <h2 class="panel-title">Select Tickets</h2>
+            <h2 class="panel-title">Select Tickets By Sheet</h2>
 	     <div id="bookingFormContainer">
                  <input type="text" id="bookerName" placeholder="Your Name">
                  <input type="tel" id="bookerPhone" placeholder="Your Mobile Number">
                  <button class="login-btn" id="requestBookingBtn">Request Booking via Agent</button>
             </div>
-	    <div id="bookingGridContainer">
+	   
+            <div id="bookingGridContainer">
             </div>
             
            
@@ -917,7 +923,7 @@
         <button class="runBtn" id="earningBtn">₹ 0</button>
     </div>
     <div class="gameSettingDiv">
-        <div class="titleBtn">BUSINESS INFO</div>
+        <div class="titleBtn">GAME & SALES INFO</div>
         <table class="gameSettingTable" id="agentBusinessInfoTable">
         </table>
     </div>
@@ -1083,7 +1089,7 @@
     <div class="gameDiv">
         <button class="x-button" onclick="closePopups()"><i class="fas fa-times"></i></button>
         <div class="panel" style="background: transparent; border: none; box-shadow: none; padding: 0; width: 95%; margin: 0.5rem auto;">
-            <div class="timer-status-bar" id="runGame-timer-bar" style="border-top: none; padding-top: 0; margin-bottom: 0.4rem;">
+            <div class="timer-status-bar" id="runGame-timer-bar" style="border-top: none; padding-top: 0; margin-bottom: 1rem;">
             </div>
         </div>
         <table class="runGameTable gameSettingTable">
@@ -1098,7 +1104,7 @@
                 </tr>
             </tbody>
         </table>
-        
+       
         <section class="panel" style="background: var(--secondary-bg-dash); width: 95%; margin: 1rem auto; border-color: var(--accent-color-dash);">
             <h2 class="panel-title" style="color: var(--light-text-dash); text-shadow: none; font-size: 1.2rem;">GAME BOARD</h2>
             <div class="number-board" id="runGamePopupBoard">
@@ -1213,12 +1219,10 @@ let gameSettingsData = {};
 let publicSelectedTickets = []; 
 let publicPopupSelectedTickets = []; 
 let adminListState = 'tickets';
-// --- MODIFICATION START: Add a variable to track the last notification ---
 let lastNotification = { message: '', type: '', timestamp: 0 };
-// --- MODIFICATION END ---
 
 const allPossibleDividends = [
-    "First Full House", "Second Full House", "Third Full House" , "Full Sheet Bonus", "Half Sheet Bonus", "Top Line", "Middle Line", "Bottom Line",
+    "First Full House", "Second Full House", "Third Full House", "Full Sheet Bonus", "Half Sheet Bonus", "Top Line", "Middle Line", "Bottom Line",
     "Early 5", "Quick 7", "Corners (4)", "Star"
 ];
 
@@ -1252,24 +1256,17 @@ window.addEventListener('hashchange', handleRouting);
 
 function showNotification(message, type = 'info', duration = 4000) {
     const now = Date.now();
-    // Cooldown period in milliseconds (e.g., 5 seconds)
-    // to prevent the same notification from appearing again too quickly.
     const cooldown = 5000;
 
-    // Check if the incoming notification is identical to the last one
-    // and if it's within the cooldown period.
     if (
         message === lastNotification.message &&
         type === lastNotification.type &&
         (now - lastNotification.timestamp) < cooldown
     ) {
-        return; // If so, exit the function and don't show it.
+        return;
     }
 
     const container = document.getElementById('notification-container');
-
-    // This second check prevents creating duplicate HTML elements if the function
-    // is called multiple times before the `lastNotification` variable is updated.
     const existingNotifs = container.querySelectorAll('.notification');
     for (const notif of existingNotifs) {
         if (notif.textContent === message && notif.classList.contains(type)) {
@@ -1278,19 +1275,15 @@ function showNotification(message, type = 'info', duration = 4000) {
     }
 
     lastNotification = { message, type, timestamp: now };
-
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
     notification.textContent = message;
-
     container.appendChild(notification);
 
-    // Animate the notification into view
     setTimeout(() => {
         notification.classList.add('show');
     }, 10);
 
-    // Set a timer to remove the notification
     setTimeout(() => {
         notification.classList.remove('show');
         notification.addEventListener('transitionend', () => notification.remove());
@@ -1565,8 +1558,14 @@ function updateTicketRelatedUIs() {
     renderVisualTicketBookingPage();
     renderSheetWiseBookedList();
     if (document.getElementById('ticketDisplayArea').innerHTML) searchTicketPublic();
-    if (currentUserRole === 'admin') updateAdminList();
-    if (currentUserRole === 'agent') showAgentSoldTickets();
+    if (currentUserRole === 'admin') {
+        updateAdminList();
+        updateBusinessInfo(); // Update admin business info when tickets change
+    }
+    if (currentUserRole === 'agent') {
+        showAgentSoldTickets();
+        updateAgentInfoUI(); // Update agent info when tickets change
+    }
     updateDashboardBookingPopup();
     if (document.getElementById('publicBookingPopup').classList.contains('active')) {
         renderPublicBookingGrid(); 
@@ -2469,10 +2468,11 @@ async function showPreviousGameWinners() {
 function updateBusinessInfo() {
     const soldTickets = allTicketsData.filter(t => t.is_sold);
     const soldCount = soldTickets.length;
+    const totalTickets = gameSettingsData.totalTickets || 0;
+    const ticketsLeft = totalTickets - soldCount;
     const price = gameSettingsData.ticketPrice || 0;
     const commission = gameSettingsData.agentCommission || 0;
     
-    // A ticket has a commission if it was sold by a user with the 'agent' role.
     const agentUids = new Set(allUsersData.filter(u => u.role === 'agent').map(u => u.uid));
     const agentSoldCount = soldTickets.filter(t => t.agent_uid && agentUids.has(t.agent_uid)).length;
     const totalCommission = agentSoldCount * commission;
@@ -2485,8 +2485,9 @@ function updateBusinessInfo() {
     const adminTable = document.getElementById('businessInfoTable');
     if(adminTable && currentView === 'adminDashboardView') {
         adminTable.innerHTML = `<tbody>
-            <tr><td>Total Tickets</td><td>${gameSettingsData.totalTickets || 0}</td></tr>
+            <tr><td>Total Tickets</td><td>${totalTickets}</td></tr>
             <tr><td>Tickets Sold</td><td>${soldCount}</td></tr>
+            <tr><td>Tickets Left</td><td>${ticketsLeft}</td></tr>
             <tr><td>Total Revenue</td><td>₹ ${totalRevenue.toLocaleString()}</td></tr>
             <tr><td>Total Agent Commission</td><td>₹ ${totalCommission.toLocaleString()}</td></tr>
             <tr><td>Total Prize Money</td><td>₹ ${totalPrizeMoney.toLocaleString()}</td></tr>
@@ -2540,7 +2541,7 @@ function updateAdminList() {
             }).join('') + `</tbody>`;
     } else {
         const users = allUsersData.filter(u => !searchTerm || (u.name||'').toLowerCase().includes(searchTerm) || (u.email||'').toLowerCase().includes(searchTerm) || (u.phone||'').toLowerCase().includes(searchTerm));
-        table.innerHTML = `` +
+        table.innerHTML = `<thead><tr><th>Name</th><th>Role</th><th>Phone</th><th>Sold</th><th>Actions</th></tr></thead><tbody>` +
             users.map(u => {
                 const soldCount = allTicketsData.filter(t => t.agent_uid === u.uid).length;
                 let actionCell = `<td data-label="Actions">-</td>`;
@@ -2735,7 +2736,7 @@ function changePosterBackground(source) {
 }
 
 function showPosterModal() {
-    const title = "StarManipur Housie";
+    const title = "Manipur Housie Tambola";
     const gameDateTime = gameSettingsData.gameDateTime;
     const ticketPrice = gameSettingsData.ticketPrice || 'N/A';
     const totalTickets = gameSettingsData.totalTickets || 'N/A';
@@ -2754,9 +2755,9 @@ function showPosterModal() {
     const dividendAmountsHTML = activeDividends.map(d => `<p>Rs ${d.amount.toLocaleString()}</p>`).join('');
 
     const posterHTML = `
-        <h1 class="poster-title">${title}</h1>
-        <p class="poster-datetime">${gameTimeFormatted}</p>
-        <p class="poster-tagline">Grab Your Tickets & Get Ready to Win!</p>
+        <h1 class="poster-title" contenteditable="true">${title}</h1>
+        <p class="poster-datetime" contenteditable="true">${gameTimeFormatted}</p>
+        <p class="poster-tagline" contenteditable="true">Grab Your Tickets & Get Ready to Win!</p>
 
         <div class="prize-section">
             <h3>PRIZES</h3>
@@ -2770,11 +2771,11 @@ function showPosterModal() {
             </div>
         </div>
 
-        <p class="ticket-details">Get ticket @ Rs ${ticketPrice}. Total tickets only (${totalTickets})</p>
+        <p class="ticket-details" contenteditable="true">Get ticket @ Rs ${ticketPrice}. Total tickets only (${totalTickets})</p>
 
         <div class="contact-section">
-            <p>visit: <a href="${websiteLink}" target="_blank">${websiteLink.replace(/^https?:\/\//, '')}</a></p>
-            <p>Whatsapp: <span>${adminPhone}</span></p>
+            <p contenteditable="true">visit: <a href="${websiteLink}" target="_blank">${websiteLink.replace(/^https?:\/\//, '')}</a></p>
+            <p contenteditable="true">Whatsapp: <span>${adminPhone}</span></p>
         </div>
     `;
 
@@ -2784,6 +2785,7 @@ function showPosterModal() {
     
     showPopup('posterMakerPopup');
 }
+
 
 function savePosterAsImage() {
     const posterElement = document.getElementById('posterContent');
@@ -2823,7 +2825,7 @@ async function sharePoster() {
         const file = new File([blob], 'housie-poster.png', { type: 'image/png' });
         const filesArray = [file];
 
-        const websiteName = "StarManipur Housie Game!";
+        const websiteName = "Sintha Team Housie Game!";
         const websiteLink = window.location.href.split('#')[0];
         
         if (navigator.canShare && navigator.canShare({ files: filesArray })) {
@@ -2850,20 +2852,34 @@ async function sharePoster() {
 
 function updateAgentInfoUI() {
     if (!currentUser || currentView !== 'agentDashboardView') return;
+    
     const agentData = allUsersData.find(u => u.uid === currentUser.uid);
     if (agentData) {
         document.getElementById('agentNameInp').value = agentData.name;
         document.getElementById('agentPhoneInp').value = agentData.phone;
     }
+    
     const mySoldTickets = allTicketsData.filter(t => t.agent_uid === currentUser.uid);
-    const myEarnings = mySoldTickets.length * (gameSettingsData.agentCommission || 0);
+    const mySoldCount = mySoldTickets.length;
+    const myEarnings = mySoldCount * (gameSettingsData.agentCommission || 0);
     document.getElementById('earningBtn').textContent = `₹ ${myEarnings.toLocaleString()}`;
 
-    document.getElementById('agentBusinessInfoTable').innerHTML = `<tbody>
-        <tr><td>Game Title</td><td>StarManipur Housie</td></tr>
-        <tr><td>Ticket Price</td><td>₹ ${(gameSettingsData.ticketPrice || 0).toLocaleString()}</td></tr>
-        <tr><td>My Commission/Tkt</td><td>₹ ${(gameSettingsData.agentCommission || 0).toLocaleString()}</td></tr>
-    </tbody>`;
+    const soldCount = allTicketsData.filter(t => t.is_sold).length;
+    const totalTickets = gameSettingsData.totalTickets || 0;
+    const ticketsLeft = totalTickets - soldCount;
+
+    const agentBusinessInfoTable = document.getElementById('agentBusinessInfoTable');
+    if (agentBusinessInfoTable) {
+        agentBusinessInfoTable.innerHTML = `<tbody>
+            <tr><td>Ticket Price</td><td>₹ ${(gameSettingsData.ticketPrice || 0).toLocaleString()}</td></tr>
+            <tr><td>My Commission/Tkt</td><td>₹ ${(gameSettingsData.agentCommission || 0).toLocaleString()}</td></tr>
+            <tr><td style="color:var(--accent-color-dash);">My Tickets Sold</td><td style="color:var(--accent-color-dash); font-weight: bold;">${mySoldCount}</td></tr>
+            <tr><td colspan="2" style="height: 10px;"></td></tr>
+            <tr><td>Total Tickets in Game</td><td>${totalTickets}</td></tr>
+            <tr><td>Total Sold</td><td>${soldCount}</td></tr>
+            <tr><td>Tickets Left</td><td>${ticketsLeft}</td></tr>
+        </tbody>`;
+    }
 }
 
 function showAgentSoldTickets() {
@@ -3725,19 +3741,6 @@ document.addEventListener('DOMContentLoaded', () => {
     bindEventListeners();
     gsap.to('.main-header, .panel', { y: 0, opacity: 1, duration: 1.2, stagger: 0.1, ease: "expo.out" });
 });
-</script>
-<script>
-(function(){
-    function _0x1a3c(_0x12, _0x34){return _0x1a3c=_0x34?function(_0x56){return _0x56.toString(36)}:function(_0x56){return _0x56};return _0x1a3c(_0x12,_0x34);}
-    document['addEventListener']('contextmenu',function(_0x1){_0x1['preventDefault']();});
-    document['addEventListener']('keydown',function(_0x2){
-        if(_0x2['key']==='F12'){_0x2['preventDefault']();}
-        if((_0x2['ctrlKey']&&_0x2['shiftKey']&&['I','J','C']['includes'](_0x2['key']['toUpperCase']()))||
-           (_0x2['ctrlKey']&&['U','S']['includes'](_0x2['key']['toUpperCase']()))){
-            _0x2['preventDefault']();
-        }
-    });
-})();
 </script>
 
 </body>

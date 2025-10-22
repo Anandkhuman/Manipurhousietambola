@@ -597,9 +597,13 @@
         background-color: #ffcdd2;
         color: #c62828;
     }
-    #bookingGridContainer .ticket-view.sold .ticket-header span,
+        #bookingGridContainer .ticket-view.sold .ticket-header span:not(.ticket-status),
     #bookingGridContainer .ticket-view.sold .ticket-header div {
         color: #c62828 !important;
+    }
+    .ticket-header span.ticket-status.sold {
+        background-color: #c62828;
+        color: white !important; /* Force white color */
     }
     #bookingGridContainer .ticket-view.sold .ticket-num.empty {
         background-color: #ffebee;
@@ -609,16 +613,45 @@
         background-color: #e3f2fd;
         border-color: #90caf9;
     }
-    #bookingGridContainer .ticket-view:not(.sold) .ticket-header {
-        background-color: #bbdefb;
-        color: #1565c0;
-    }
-     #bookingGridContainer .ticket-view:not(.sold) .ticket-header span,
+   #bookingGridContainer .ticket-view:not(.sold) .ticket-header span:not(.ticket-status),
      #bookingGridContainer .ticket-view:not(.sold) .ticket-header div {
         color: #1565c0 !important;
      }
+    .ticket-header span.ticket-status.available {
+        background-color: #2e7d32;
+        color: white !important; /* Force white color */
+    }
+    }
+     #bookingGridContainer .ticket-view:not(.sold) .ticket-header span:not(.ticket-status),
+ #bookingGridContainer .ticket-view:not(.sold) .ticket-header div {
+    color: #1565c0 !important;
+ }
     #bookingGridContainer .ticket-view:not(.sold) .ticket-num.empty {
         background-color: #e3f2fd;
+    }
+
+    /* NEW TICKET STATUS STYLES */
+    .ticket-header span.ticket-status {
+        font-weight: bold;
+        padding: 2px 8px;
+        border-radius: 10px;
+        font-size: 0.7rem;
+        float: right;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        line-height: 1.5;
+    }
+    .ticket-header span.ticket-status.sold {
+        background-color: #c62828;
+        color: white;
+    }
+    .ticket-header span.ticket-status.available {
+        background-color: #2e7d32;
+        color: white;
+    }
+    .ticket-header span.ticket-status.missing {
+        background-color: #7f8c8d;
+        color: white;
     }
 
     .selection-indicator {
@@ -1175,250 +1208,327 @@
             margin-bottom: 0.8rem;
         }
     }
-.success-animation {
-    margin: 0 auto 1rem auto;
-    width: 100px;
-    height: 100px;
-}
-
-.checkmark {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    display: block;
-    stroke-width: 2;
-    stroke: #ffffff;
-    stroke-miterlimit: 10;
-    box-shadow: inset 0px 0px 0px #2ecc71;
-    margin: 0 auto;
-    animation: fill_anim 0.4s ease-in-out 0.4s forwards, scale_anim 0.3s ease-in-out 0.9s both;
-}
-
-.checkmark__circle {
-    stroke-dasharray: 166;
-    stroke-dashoffset: 166;
-    stroke-width: 2;
-    stroke-miterlimit: 10;
-    stroke: #2ecc71;
-    fill: none;
-    animation: stroke_anim 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
-}
-
-.checkmark__check {
-    transform-origin: 50% 50%;
-    stroke-dasharray: 48;
-    stroke-dashoffset: 48;
-    animation: stroke_anim 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
-}
-
-@keyframes stroke_anim {
-    100% {
-        stroke-dashoffset: 0;
+    
+    /* --- NEW: STYLISH LOADING SPINNER --- */
+    .loading-spinner-container {
+        display: none; /* Hidden by default */
+        margin: 0 auto 1.5rem auto;
+        width: 80px;
+        height: 80px;
     }
-}
-
-@keyframes scale_anim {
-    0% {
-        transform: none;
+    .loading-spinner {
+        display: inline-block;
+        width: 80px;
+        height: 80px;
     }
-    20% {
-        transform: scale3d(1.1, 1.1, 1);
+    .loading-spinner:after {
+        content: " ";
+        display: block;
+        width: 64px;
+        height: 64px;
+        margin: 8px;
+        border-radius: 50%;
+        border: 6px solid var(--accent-primary);
+        border-color: var(--accent-primary) transparent var(--accent-primary) transparent;
+        animation: lds-dual-ring 1.2s linear infinite;
     }
-    40% {
-        transform: scale3d(0.9, 0.9, 1);
+    @keyframes lds-dual-ring {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
     }
-    60% {
-        transform: scale3d(1.03, 1.03, 1);
+    /* Show spinner and hide checkmark when popup is in processing state */
+    #bookingSuccessPopup.processing .success-animation {
+        display: none;
     }
-    80% {
-        transform: scale3d(0.97, 0.97, 1);
+    #bookingSuccessPopup.processing .loading-spinner-container {
+        display: block;
     }
-    100% {
-        transform: none;
+    
+    .success-animation {
+        margin: 0 auto 1rem auto;
+        width: 100px;
+        height: 100px;
     }
-}
 
-@keyframes fill_anim {
-    100% {
-        box-shadow: inset 0px 0px 0px 50px #2ecc71;
+    .checkmark {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        display: block;
+        stroke-width: 2;
+        stroke: #ffffff;
+        stroke-miterlimit: 10;
+        box-shadow: inset 0px 0px 0px #2ecc71;
+        margin: 0 auto;
+        animation: fill_anim 0.4s ease-in-out 0.4s forwards, scale_anim 0.3s ease-in-out 0.9s both;
     }
-}
 
-/* --- NEW AGENT LIST CARD STYLES --- */
-#adminGameSettingTable.agent-list-view {
-    display: block;
-}
-#adminGameSettingTable.agent-list-view thead {
-    display: none;
-}
-#adminGameSettingTable.agent-list-view tbody,
-#adminGameSettingTable.agent-list-view tr.agent-row-card {
-    display: block;
-    width: 100%;
-}
-tr.agent-row-card {
-    margin-bottom: 0.5rem !important;
-    padding: 0 !important;
-    border: 1px solid transparent !important;
-    border-radius: 6px;
-    background-color: var(--secondary-bg-dash);
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-}
-tr.agent-row-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    border-color: var(--accent-color-dash) !important;
-}
-tr.agent-row-card td {
-    display: block;
-    padding: 0.8rem !important;
-    border: none !important;
-}
-.agent-card-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    width: 100%;
-}
-.agent-card-info {
-    flex-grow: 1;
-    min-width: 0;
-}
-.agent-card-name {
-    font-weight: 700;
-    font-size: 1rem;
-    color: var(--light-text-dash);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.agent-card-name small {
-    font-weight: 400;
-    font-size: 0.8em;
-    color: var(--muted-color-dash);
-    text-transform: capitalize;
-}
-.agent-card-phone {
-    font-size: 0.85rem;
-    color: var(--muted-color-dash);
-    margin-top: 4px;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-}
-.agent-card-stats {
-    display: flex;
-    gap: 1rem;
-    text-align: center;
-    flex-shrink: 0;
-}
-.agent-stat-item {
-    display: flex;
-    flex-direction: column;
-    min-width: 80px;
-}
-.agent-stat-item span {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--accent-color-dash);
-}
-.agent-stat-item label {
-    font-size: 0.7rem;
-    color: var(--muted-color-dash);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-.agent-card-actions {
-    flex-shrink: 0;
-    padding-left: 0.5rem;
-}
-.agent-card-actions .fa-trash-alt {
-    color: #e74c3c;
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: transform 0.2s, color 0.2s;
-}
-.agent-card-actions .fa-trash-alt:hover {
-    transform: scale(1.2);
-    color: #ff7675;
-}
-.agent-card-actions span {
-    color: var(--muted-color-dash);
-    font-size: 1.2rem;
-}
+    .checkmark__circle {
+        stroke-dasharray: 166;
+        stroke-dashoffset: 166;
+        stroke-width: 2;
+        stroke-miterlimit: 10;
+        stroke: #2ecc71;
+        fill: none;
+        animation: stroke_anim 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+    }
 
-/* NEW AUDIO STYLES */
-@keyframes mic-live-glow {
-    0% { box-shadow: 0 0 5px #ff4d4d, 0 0 10px #ff4d4d; }
-    50% { box-shadow: 0 0 15px #ff7979, 0 0 20px #ff7979; }
-    100% { box-shadow: 0 0 5px #ff4d4d, 0 0 10px #ff4d4d; }
-}
+    .checkmark__check {
+        transform-origin: 50% 50%;
+        stroke-dasharray: 48;
+        stroke-dashoffset: 48;
+        animation: stroke_anim 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+    }
 
-#micToggleBtn.live {
-    background-color: #e74c3c;
-    color: white;
-    animation: mic-live-glow 1.5s infinite;
-}
+    @keyframes stroke_anim {
+        100% {
+            stroke-dashoffset: 0;
+        }
+    }
 
-.music-control-wrapper {
-    display: flex;
-    gap: 5px;
-}
-.music-control-wrapper .tableInp {
-    flex-grow: 1;
-}
-.music-control-wrapper .actionBtn {
-    width: auto !important;
-    flex-grow: 0;
-    padding: 0 1rem;
-}
+    @keyframes scale_anim {
+        0% {
+            transform: none;
+        }
+        20% {
+            transform: scale3d(1.1, 1.1, 1);
+        }
+        40% {
+            transform: scale3d(0.9, 0.9, 1);
+        }
+        60% {
+            transform: scale3d(1.03, 1.03, 1);
+        }
+        80% {
+            transform: scale3d(0.97, 0.97, 1);
+        }
+        100% {
+            transform: none;
+        }
+    }
 
-#musicPlaylist {
-    margin: 1rem 2.5% 0 2.5%;
-    width: 95%;
-    max-height: 250px;
-    overflow-y: auto;
-    background: var(--secondary-bg-dash);
-    border-radius: 4px;
-    padding: 0.5rem;
-}
-.playlist-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem;
-    border-bottom: 1px solid var(--primary-bg-dash);
-    color: var(--light-text-dash);
-}
-.playlist-item:last-child {
-    border-bottom: none;
-}
-.playlist-item-name {
-    flex-grow: 1;
-    font-size: 0.9rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.playlist-item-actions button {
-    background: transparent;
-    border: none;
-    color: var(--light-text-dash);
-    cursor: pointer;
-    font-size: 1rem;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    transition: background-color 0.2s, transform 0.2s;
-}
-.playlist-item-actions button:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    transform: scale(1.1);
-}
-.playlist-item-actions .fa-play-circle { color: var(--accent-color-dash); }
-.playlist-item-actions .fa-trash-alt { color: #e74c3c; }
+    @keyframes fill_anim {
+        100% {
+            box-shadow: inset 0px 0px 0px 50px #2ecc71;
+        }
+    }
+
+    /* --- NEW AGENT LIST CARD STYLES --- */
+    #adminGameSettingTable.agent-list-view {
+        display: block;
+    }
+    #adminGameSettingTable.agent-list-view thead {
+        display: none;
+    }
+    #adminGameSettingTable.agent-list-view tbody,
+    #adminGameSettingTable.agent-list-view tr.agent-row-card {
+        display: block;
+        width: 100%;
+    }
+    tr.agent-row-card {
+        margin-bottom: 0.5rem !important;
+        padding: 0 !important;
+        border: 1px solid transparent !important;
+        border-radius: 6px;
+        background-color: var(--secondary-bg-dash);
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    tr.agent-row-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        border-color: var(--accent-color-dash) !important;
+    }
+    tr.agent-row-card td {
+        display: block;
+        padding: 0.8rem !important;
+        border: none !important;
+    }
+    .agent-card-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        width: 100%;
+    }
+    .agent-card-info {
+        flex-grow: 1;
+        min-width: 0;
+    }
+    .agent-card-name {
+        font-weight: 700;
+        font-size: 1rem;
+        color: var(--light-text-dash);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .agent-card-name small {
+        font-weight: 400;
+        font-size: 0.8em;
+        color: var(--muted-color-dash);
+        text-transform: capitalize;
+    }
+    .agent-card-phone {
+        font-size: 0.85rem;
+        color: var(--muted-color-dash);
+        margin-top: 4px;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+    }
+    .agent-card-stats {
+        display: flex;
+        gap: 1rem;
+        text-align: center;
+        flex-shrink: 0;
+    }
+    .agent-stat-item {
+        display: flex;
+        flex-direction: column;
+        min-width: 80px;
+    }
+    .agent-stat-item span {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--accent-color-dash);
+    }
+    .agent-stat-item label {
+        font-size: 0.7rem;
+        color: var(--muted-color-dash);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .agent-card-actions {
+        flex-shrink: 0;
+        padding-left: 0.5rem;
+    }
+    .agent-card-actions .fa-trash-alt {
+        color: #e74c3c;
+        cursor: pointer;
+        font-size: 1.2rem;
+        transition: transform 0.2s, color 0.2s;
+    }
+    .agent-card-actions .fa-trash-alt:hover {
+        transform: scale(1.2);
+        color: #ff7675;
+    }
+    .agent-card-actions span {
+        color: var(--muted-color-dash);
+        font-size: 1.2rem;
+    }
+
+    /* NEW AUDIO STYLES */
+    @keyframes mic-live-glow {
+        0% { box-shadow: 0 0 5px #ff4d4d, 0 0 10px #ff4d4d; }
+        50% { box-shadow: 0 0 15px #ff7979, 0 0 20px #ff7979; }
+        100% { box-shadow: 0 0 5px #ff4d4d, 0 0 10px #ff4d4d; }
+    }
+
+    #micToggleBtn.live {
+        background-color: #e74c3c;
+        color: white;
+        animation: mic-live-glow 1.5s infinite;
+    }
+
+    .music-control-wrapper {
+        display: flex;
+        gap: 5px;
+    }
+    .music-control-wrapper .tableInp {
+        flex-grow: 1;
+    }
+    .music-control-wrapper .actionBtn {
+        width: auto !important;
+        flex-grow: 0;
+        padding: 0 1rem;
+    }
+
+    #musicPlaylist, #popupMusicPlaylist {
+        max-height: 250px;
+        overflow-y: auto;
+        background: var(--secondary-bg-dash);
+        border-radius: 4px;
+        padding: 0.5rem;
+    }
+    #musicPlaylist {
+        margin: 1rem 2.5% 0 2.5%;
+        width: 95%;
+    }
+    #popupMusicPlaylist {
+        padding: 0 0.5rem 0.5rem 0.5rem;
+    }
+
+    .playlist-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem;
+        border-bottom: 1px solid var(--primary-bg-dash);
+        color: var(--light-text-dash);
+        transition: background-color 0.3s;
+    }
+    .playlist-item:last-child {
+        border-bottom: none;
+    }
+    .playlist-item-name {
+        flex-grow: 1;
+        font-size: 0.9rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .playlist-item-actions button {
+        background: transparent;
+        border: none;
+        color: var(--light-text-dash);
+        cursor: pointer;
+        font-size: 1rem;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        transition: background-color 0.2s, transform 0.2s;
+        position: relative; /* For gradient */
+        z-index: 1;
+    }
+    .playlist-item-actions button:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: scale(1.1);
+    }
+    .playlist-item-actions .fa-play-circle { color: var(--accent-color-dash); }
+    .playlist-item-actions .fa-trash-alt { color: #e74c3c; }
+
+    /* NEW Playlist Animation Styles */
+    @keyframes glowing-gradient-border {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    @keyframes pulse-icon {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+    }
+
+    .playlist-item.playing .playlist-item-actions button:first-child::before {
+        content: '';
+        position: absolute;
+        top: -3px; left: -3px;
+        right: -3px; bottom: -3px;
+        background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary), #fff200, var(--accent-primary));
+        background-size: 400% 400%;
+        border-radius: 50%;
+        z-index: -1;
+        animation: glowing-gradient-border 4s linear infinite;
+        filter: blur(4px);
+    }
+    .playlist-item.playing .playlist-item-actions button:first-child {
+        background-color: var(--primary-bg-dash) !important;
+        transform: scale(1.1);
+    }
+    .playlist-item.playing .playlist-item-actions .fa-play-circle {
+        color: var(--accent-primary);
+        animation: pulse-icon 1.5s infinite ease-in-out;
+    }
 
 </style>
 </head>
@@ -1620,11 +1730,17 @@ tr.agent-row-card td {
                         </button>
                     </td>
                 </tr>
+                <tr>
+                    <td>Manage Playlist</td>
+                    <td>
+                        <button class="actionBtn" id="viewPlaylistBtn" style="width:100%; font-size: 1rem;">
+                            <i class="fas fa-list-ul"></i> View Playlist
+                        </button>
+                    </td>
+                </tr>
             </tbody>
         </table>
-        <div id="musicPlaylist">
-            <!-- Playlist items will be rendered here by JavaScript -->
-        </div>
+    
     </div>
     <div class="gameSettingDiv">
         <button class="titleBtn">BUSINESS INFO</button>
@@ -1852,7 +1968,7 @@ tr.agent-row-card td {
                 </tr>
             </tbody>
         </table>
-      
+  
           <section class="panel" style="background: var(--secondary-bg-dash); width: 95%; margin: 1rem auto; border-color: var(--accent-color-dash);">
             <h2 class="panel-title" style="color: var(--light-text-dash); text-shadow: none; font-size: 1.2rem;">VIEW TICKET</h2>
             <div class="search-container" style="padding: 0 1rem 1rem 1rem;">
@@ -1965,6 +2081,12 @@ tr.agent-row-card td {
 <!-- NEW: Booking Success Popup -->
 <div class="overlay-popup" id="bookingSuccessPopup">
     <div class="popup-content" style="background: var(--primary-surface); border-color: #2ecc71; box-shadow: 0 0 20px rgba(46, 204, 113, 0.5); padding: 2rem;">
+        
+        <!-- NEW: Loading Spinner -->
+        <div class="loading-spinner-container">
+            <div class="loading-spinner"></div>
+        </div>
+        
         <div class="success-animation">
             <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
                 <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
@@ -1975,6 +2097,18 @@ tr.agent-row-card td {
         <p id="bookingSuccessMessage" style="text-align: center; color: var(--text-secondary); line-height: 1.5;"></p>
     </div>
 </div>
+
+<!-- NEW: Playlist Popup -->
+<div class="overlay-popup" id="playlistPopup">
+    <div class="popup-content" style="max-width: 600px; background: var(--primary-bg-dash);">
+        <button class="x-button" onclick="closePopups()"><i class="fas fa-times"></i></button>
+        <h3 class="popup-title" style="color: var(--light-text-dash);">Music Playlist</h3>
+        <div id="popupMusicPlaylist" style="max-height: 70vh; overflow-y: auto;">
+            <!-- Playlist will be rendered here -->
+        </div>
+    </div>
+</div>
+
 
 <!-- Global Audio Players -->
 <audio id="backgroundMusicPlayer" loop></audio>
@@ -1999,6 +2133,18 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.database();
+
+// --- NEW: For music synchronization ---
+let serverTimeOffset = 0;
+db.ref('.info/serverTimeOffset').on('value', (snap) => {
+    serverTimeOffset = snap.val();
+});
+
+function getEstimatedServerTime() {
+    return Date.now() + serverTimeOffset;
+}
+// --- END NEW ---
+
 
 // State Variables
 const audioBaseUrl = "https://raw.githubusercontent.com/Anandkhuman/housie/main/audio/";
@@ -2029,9 +2175,17 @@ let adminDisplayedSearchPhones = new Set();
 const popupCloseTimeouts = new Map();
 const listeners = {}; // To keep track of Firebase listeners
 
-// NEW: Audio related variables
+// --- AUDIO FIX: Variables for Media Source Streaming ---
 let backgroundMusicPlayer;
 let liveAudioPlayer;
+let mediaSource;
+let sourceBuffer;
+let audioQueue = [];
+let isAppending = false;
+let isMediaSourceOpen = false;
+let lastProcessedTimestamp = 0;
+// --- End Audio Fix Variables ---
+
 let localStream;
 let mediaRecorder;
 let isMicOn = false;
@@ -2227,6 +2381,7 @@ function bindEventListeners() {
         adminDisplayedSearchPhones.clear();
     });
     document.getElementById('bg-upload').addEventListener('change', handlePosterBgUpload);
+    document.getElementById('viewPlaylistBtn').addEventListener('click', () => showPopup('playlistPopup'));
 }
 
 function showPopup(id) {
@@ -2356,7 +2511,7 @@ function setupRealtimeListeners() {
         
         handleBackgroundMusicState(audioData);
         if (currentUserRole !== 'admin') {
-            handleLiveAudioState(audioData);
+            handleLiveAudioStream(audioData);
         } else {
              renderMusicPlaylist();
         }
@@ -2610,7 +2765,7 @@ function renderVisualTicketBookingPage() {
     }
 
     const totalTickets = gameSettingsData.totalTickets || 0;
-    if (allTicketsData.length === 0 || totalTickets === 0) {
+    if (totalTickets === 0) {
         gridContainer.innerHTML = '<p style="text-align: center;">Tickets have not been generated by the admin yet.</p>';
         return;
     }
@@ -2642,16 +2797,19 @@ function renderVisualTicketBookingPage() {
             const ticketView = document.createElement('div');
             ticketView.id = `booking-ticket-${j}`;
             ticketView.className = 'ticket-view';
-            if (ticket && ticket.is_sold) {
-                ticketView.classList.add('sold');
-            } else {
-                ticketView.onclick = () => togglePublicTicketSelection(j);
-            }
-
-            let headerHTML = `<div class="ticket-header">Ticket ${j}</div>`;
+            
+            let headerHTML;
             let gridHTML = '';
 
             if (ticket) {
+                if (ticket.is_sold) {
+                    ticketView.classList.add('sold');
+                    headerHTML = `<div class="ticket-header"><span>Ticket ${j}</span><span class="ticket-status sold">SOLD</span></div>`;
+                } else {
+                    ticketView.onclick = () => togglePublicTicketSelection(j);
+                    headerHTML = `<div class="ticket-header"><span>Ticket ${j}</span><span class="ticket-status available">AVAILABLE</span></div>`;
+                }
+                
                 if (Array.isArray(ticket.numbers) && ticket.numbers.length > 0) {
                     gridHTML = ticket.numbers.flat().map(n =>
                         `<div class="ticket-num ${n > 0 ? '' : 'empty'}" data-num="${n}">${n > 0 ? n : ''}</div>`
@@ -2660,6 +2818,7 @@ function renderVisualTicketBookingPage() {
                     gridHTML = '<p style="text-align:center; padding: 1rem; color: red;">Visual ticket data missing.</p>';
                 }
             } else {
+                headerHTML = `<div class="ticket-header">Ticket ${j} <span class="ticket-status missing">DATA MISSING</span></div>`;
                 gridHTML = '<p style="text-align:center; padding: 1rem;">Data missing</p>';
             }
 
@@ -2796,127 +2955,140 @@ async function redirectToWhatsApp(agentPhone, userName, userPhone, ticketIds) {
 async function processBookingLink() {
     const urlParams = new URLSearchParams(window.location.search);
     const bookingCode = urlParams.get('book');
-    
     if (!bookingCode) return;
 
-    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-    
+    // --- IMMEDIATE UI FEEDBACK WITH SPINNER ---
     const popup = document.getElementById('bookingSuccessPopup');
     const titleEl = document.getElementById('bookingSuccessTitle');
     const messageEl = document.getElementById('bookingSuccessMessage');
-    const checkmarkSVG = popup.querySelector('.checkmark');
 
-    titleEl.textContent = 'Processing Booking...';
-    messageEl.innerHTML = '<i class="fas fa-spinner fa-spin fa-2x"></i><p style="margin-top: 1rem;">Please wait while we confirm the booking.</p>';
-    if (checkmarkSVG) checkmarkSVG.style.display = 'none';
-    
+    // Setup processing state with spinner
+    popup.classList.add('processing'); 
+    titleEl.textContent = 'Confirming Booking...';
+    titleEl.style.color = 'var(--accent-primary)'; 
+    titleEl.style.textShadow = '0 0 8px var(--accent-primary)';
+    messageEl.textContent = 'Please wait while we verify ticket availability...';
     showPopup('bookingSuccessPopup');
-
     window.history.replaceState({}, document.title, window.location.pathname);
 
-    const handleErrorAndCleanup = (msg) => {
-        closePopups();
-        showNotification(msg, 'error');
-        handleRouting();
-    };
+    // This is the core booking logic, defined as an async function
+    const bookingLogic = async () => {
+        // Wait for auth to be ready
+        const startTime = Date.now();
+        while (!authInitialized && Date.now() - startTime < 8000) {
+            await new Promise(resolve => setTimeout(resolve, 100));
+        }
+        if (!currentUserRole || (currentUserRole !== 'admin' && currentUserRole !== 'agent')) {
+            throw new Error('You must be logged in as an Admin or Agent to confirm a booking.');
+        }
 
-    const startTime = Date.now();
-    while (!authInitialized && Date.now() - startTime < 8000) {
-        await new Promise(resolve => setTimeout(resolve, 100));
-    }
-    
-    if (!currentUserRole || (currentUserRole !== 'admin' && currentUserRole !== 'agent')) {
-        handleErrorAndCleanup('You must be logged in as an Admin or Agent to confirm a booking.');
-        showPopup('loginPopup');
-        return;
-    }
-
-    while (allTicketsData.length === 0 && Date.now() - startTime < 15000) {
-        await new Promise(resolve => setTimeout(resolve, 100));
-    }
-    if (allTicketsData.length === 0) {
-        handleErrorAndCleanup('Could not load ticket data. Please refresh and try again.');
-        return;
-    }
-    
-    const requestRef = db.ref(`bookingRequests/${bookingCode}`);
-    try {
+        const requestRef = db.ref(`bookingRequests/${bookingCode}`);
         const snapshot = await requestRef.once('value');
         if (!snapshot.exists()) {
-            handleErrorAndCleanup('This booking link is invalid or has already been used.');
-            return;
+            throw new Error('This booking link is invalid or has already been used.');
         }
 
         const requestData = snapshot.val();
         const { name, phone, tickets: ticketIdsToBook } = requestData;
 
         if (!name || !phone || !Array.isArray(ticketIdsToBook) || ticketIdsToBook.length === 0) {
-            handleErrorAndCleanup('Invalid data in booking link.');
             await requestRef.remove();
-            return;
+            throw new Error('Invalid data found in the booking link.');
         }
 
-        const alreadySold = [];
-        for (const id of ticketIdsToBook) {
-            const ticketData = allTicketsData.find(t => t.id === id);
-            if (ticketData && ticketData.is_sold) {
-                alreadySold.push(id);
+        const ticketsRef = db.ref('tickets');
+        const transactionResult = await ticketsRef.transaction(currentTickets => {
+            if (currentTickets === null) return; // Abort if tickets node doesn't exist
+
+            // Check if all requested tickets are available
+            for (const id of ticketIdsToBook) {
+                if (!currentTickets[id] || (currentTickets[id] && currentTickets[id].is_sold)) {
+                    return; // Abort transaction if a ticket is missing or already sold
+                }
             }
-        }
-        
-        if (alreadySold.length > 0) {
-             handleErrorAndCleanup(`Cannot book. Ticket(s) ${alreadySold.join(', ')} are already sold.`);
-             await requestRef.remove();
-             return;
-        }
 
-        const updates = {};
-        const timestamp = firebase.database.ServerValue.TIMESTAMP;
-        ticketIdsToBook.forEach(id => {
-            updates[`/tickets/${id}/is_sold`] = true;
-            updates[`/tickets/${id}/owner_name`] = name;
-            updates[`/tickets/${id}/owner_name_lower`] = name.toLowerCase();
-            updates[`/tickets/${id}/owner_phone`] = phone;
-            updates[`/tickets/${id}/agent_uid`] = currentUser.uid;
-            updates[`/tickets/${id}/sold_at`] = timestamp;
+            // All tickets are available, so book them
+            const timestamp = firebase.database.ServerValue.TIMESTAMP;
+            ticketIdsToBook.forEach(id => {
+                currentTickets[id].is_sold = true;
+                currentTickets[id].owner_name = name;
+                currentTickets[id].owner_name_lower = name.toLowerCase();
+                currentTickets[id].owner_phone = phone;
+                currentTickets[id].agent_uid = currentUser.uid;
+                currentTickets[id].sold_at = timestamp;
+            });
+            return currentTickets;
         });
 
-        await db.ref().update(updates);
-        await requestRef.remove();
+        await requestRef.remove(); // Clean up the request from DB
 
-        const successMsg = `${ticketIdsToBook.length} ticket(s) successfully booked for ${name}. Redirecting to dashboard...`;
-        
+        if (!transactionResult.committed) {
+            // Transaction failed, find out why for a better error message
+            const freshSnapshot = await ticketsRef.once('value');
+            const freshTickets = freshSnapshot.val();
+            const soldTickets = ticketIdsToBook.filter(id => freshTickets[id] && freshTickets[id].is_sold);
+            if (soldTickets.length > 0) {
+                throw new Error(`Booking failed. Ticket(s) ${soldTickets.join(', ')} were already sold.`);
+            } else {
+                throw new Error('Booking failed due to a data conflict. Please refresh and try again.');
+            }
+        }
+
+        // Success
+        triggerGlobalNotification(`${ticketIdsToBook.length} ticket(s) just booked for ${name}.`, 'info');
+        return `${ticketIdsToBook.length} ticket(s) successfully booked for ${name}. Redirecting...`;
+    };
+
+    try {
+        // Run booking logic and a minimum animation delay in parallel
+        // This ensures the "Processing" state is visible for at least 1.5 seconds for a smooth UX
+        const [successMsg] = await Promise.all([
+            bookingLogic(),
+            new Promise(resolve => setTimeout(resolve, 1500))
+        ]);
+
+        // --- UPDATE UI TO SUCCESS STATE ---
+        popup.classList.remove('processing');
         titleEl.textContent = 'Booking Successful!';
+        titleEl.style.color = '#2ecc71';
+        titleEl.style.textShadow = '0 0 8px #2ecc71';
         messageEl.textContent = successMsg;
-        
+        const checkmarkSVG = popup.querySelector('.checkmark');
         if (checkmarkSVG) {
-            checkmarkSVG.style.display = 'block';
+            // This logic forces the browser to restart the CSS animation
             const circle = popup.querySelector('.checkmark__circle');
             const check = popup.querySelector('.checkmark__check');
-            checkmarkSVG.style.animation = 'none';
-            circle.style.animation = 'none';
-            check.style.animation = 'none';
-            void checkmarkSVG.offsetWidth; 
+            [checkmarkSVG, circle, check].forEach(el => {
+                el.style.animation = 'none';
+                void el.offsetWidth; // Trigger a DOM reflow
+            });
             checkmarkSVG.style.animation = 'fill_anim 0.4s ease-in-out 0.4s forwards, scale_anim 0.3s ease-in-out 0.9s both';
             circle.style.animation = 'stroke_anim 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards';
             check.style.animation = 'stroke_anim 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards';
         }
-
-        triggerGlobalNotification(`${ticketIdsToBook.length} ticket(s) just booked for ${name}.`, 'info');
-
+        
+        // Wait a moment on the success screen before redirecting
         setTimeout(() => {
             if (currentUserRole) {
                 window.location.hash = currentUserRole;
             } else {
                 handleRouting();
             }
-        }, 4000);
+            closePopups();
+        }, 2500);
 
     } catch(e) {
-        handleErrorAndCleanup('Error processing booking: ' + e.message);
-        await requestRef.remove().catch(err => console.error("Failed to cleanup requestRef on error", err));
+        popup.classList.remove('processing');
+        closePopups(); // Close the processing popup on error
+        showNotification(e.message, 'error'); // Show the specific error message
+        if (e.message.includes('must be logged in')) {
+            showPopup('loginPopup');
+        } else {
+            handleRouting();
+        }
     }
 }
+
 
 function searchTicketPublic(searchTermOverride = null, isRerender = false) {
     const searchTerm = searchTermOverride || document.getElementById('ticketSearchInp').value.trim();
@@ -3986,6 +4158,7 @@ function savePosterAsImage() {
         useCORS: true, 
         allowTaint: true,
         logging: false,
+        scale: 3,
     }).then(canvas => {
         const link = document.createElement('a');
         link.download = 'sintha-housie-poster.png';
@@ -4005,7 +4178,7 @@ async function sharePoster() {
     showNotification('Preparing poster for sharing...', 'info');
 
     try {
-        const canvas = await html2canvas(posterElement, { useCORS: true, allowTaint: true });
+        const canvas = await html2canvas(posterElement, { useCORS: true, allowTaint: true, scale: 3});
         const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
         const file = new File([blob], 'housie-poster.png', { type: 'image/png' });
         const filesArray = [file];
@@ -4548,6 +4721,11 @@ function checkAllWinners(calledNumbers, currentWinners) {
                                     ticketId: `Half Sheet (${firstHalfIds.join(',')})`,
                                     winningNumber: lastCalledNumber,
                                     won_at: firebase.database.ServerValue.TIMESTAMP,
+
+
+
+
+
                                     dividendName: dividend.name
                                 });
                                 winnerFoundInSheet = true;
@@ -4711,6 +4889,8 @@ function createTambolaSetOf6() {
             }
         }
     }
+
+    
     return finalTickets;
 }
 
@@ -4818,9 +4998,10 @@ async function downloadTicketAsPDF(ticketId) {
     doc.setFontSize(16);
     doc.text(`Housie Ticket ${ticketData.id}`, startX, startY);
     if(ticketData.is_sold){
-        doc.setFontSize(10);
+         doc.setFontSize(10);
         doc.text(`Owner: ${ticketData.owner_name} (${ticketData.owner_phone})`, startX, startY + 7);
     }
+
 
     doc.setFontSize(14);
     for (let row = 0; row < 3; row++) {
@@ -4835,52 +5016,54 @@ async function downloadTicketAsPDF(ticketId) {
         }
     }
 
-    doc.save(`Housie-Ticket-${ticketId}.pdf`);
-    showNotification(`Downloading PDF for ticket ${ticketId}.`, 'success');
+    doc.save(`Housie-Ticket-${ticketData.id}.pdf`);
+    showNotification(`Downloading PDF for ticket ${ticketData.id}.`, 'success');
 }
 
 async function downloadWinnersPDF() {
     if (Object.keys(knownWinners).length === 0) {
-        showNotification("No winners to download yet.", "info");
-        return;
+        return showNotification("No winners to download yet.", "info");
     }
+
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-
-    doc.setFontSize(18);
-    doc.text("Housie Game - Winners List", 105, 15, { align: 'center' });
-    doc.setFontSize(10);
-    doc.text(new Date().toLocaleString(), 105, 20, { align: 'center' });
-
-    const tableData = Object.entries(knownWinners).flatMap(([dividend, winnerArray]) => 
-        winnerArray.map(winner => [
-            dividend,
-            winner.name,
-            String(winner.ticketId)
-        ])
-    );
     
-    let y = 35;
-    doc.setFontSize(12);
-    doc.setFont(undefined, 'bold');
-    doc.text("Dividend", 15, y);
-    doc.text("Winner Name", 80, y);
-    doc.text("Ticket ID", 150, y);
-    doc.setFont(undefined, 'normal');
-    y += 7;
+    doc.setFontSize(18);
+    doc.text('Game Winners List', 105, 15, { align: 'center' });
+    doc.setFontSize(10);
+    doc.text(new Date().toLocaleString(), 105, 22, { align: 'center' });
 
-    tableData.forEach(row => {
-        doc.text(row[0], 15, y);
-        doc.text(row[1], 80, y);
-        doc.text(row[2], 150, y);
-        y += 7;
-        if (y > 280) {
+    let y = 35;
+
+    for (const dividendName in knownWinners) {
+        if (y > 270) {
             doc.addPage();
             y = 15;
         }
-    });
 
-    doc.save("Housie-Winners.pdf");
+        doc.setFontSize(14);
+        doc.setFont(undefined, 'bold');
+        doc.text(dividendName, 15, y);
+        y += 7;
+
+        doc.setFontSize(10);
+        doc.setFont(undefined, 'normal');
+
+        const winnerArray = knownWinners[dividendName];
+        winnerArray.forEach(winner => {
+            if (y > 280) {
+                doc.addPage();
+                y = 15;
+            }
+            const winnerText = ` - ${winner.name} (Ticket: ${winner.ticketId})`;
+            doc.text(winnerText, 20, y);
+            y += 7;
+        });
+        y += 5; // Extra space between dividends
+    }
+
+    doc.save('Game-Winners.pdf');
+    showNotification('Winners PDF download started.', 'success');
 }
 
 function updateRunGameUI(gameState) {
@@ -4925,8 +5108,6 @@ function searchTicketAdmin() {
         
         let ticketsHTML = '';
         ticketsToDisplay.sort((a, b) => a.id - b.id).forEach(ticket => {
-       
-        
             let gridHTML;
             if (ticket && Array.isArray(ticket.numbers) && ticket.numbers.length > 0) {
                  gridHTML = ticket.numbers.flat().map(n =>
@@ -4985,7 +5166,7 @@ async function handleMusicUpload() {
     if (!file) return showNotification('Please select an MP3 file first.', 'error');
     if (file.type !== "audio/mpeg") return showNotification('Only MP3 files are allowed.', 'error');
 
-    showNotification(`Uploading '${file.name}'...`, 'info', 10000); // Animation via notification
+    showNotification(`Uploading '${file.name}'...`, 'info', 10000);
     const reader = new FileReader();
     reader.onload = async (event) => {
         const base64String = event.target.result;
@@ -5035,7 +5216,12 @@ async function handleStreamingUrl() {
 async function playTrack(trackId) {
     if (!trackId || !audioLibrary[trackId]) return;
     try {
-        await db.ref('settings/audio/currentTrackId').set(trackId);
+        // When a new track is played, reset the start time for synchronization
+        const updates = {
+            currentTrackId: trackId,
+            playbackStartTime: firebase.database.ServerValue.TIMESTAMP
+        };
+        await db.ref('settings/audio').update(updates);
         showNotification(`Now playing: ${audioLibrary[trackId].name}`, 'info');
     } catch(e) {
         showNotification('Error setting track: ' + e.message, 'error');
@@ -5046,10 +5232,15 @@ async function deleteTrack(trackId) {
     if (!trackId || !audioLibrary[trackId]) return;
     if (!confirm(`Are you sure you want to delete "${audioLibrary[trackId].name}"?`)) return;
     try {
-        await db.ref(`settings/audio/musicLibrary/${trackId}`).remove();
+        const updates = {
+            [`musicLibrary/${trackId}`]: null
+        };
         if (currentTrackId === trackId) {
-            await db.ref('settings/audio/currentTrackId').set(null);
+            updates.currentTrackId = null;
+            updates.musicState = 'off'; // Turn off music if the current track is deleted
+            updates.playbackStartTime = null;
         }
+        await db.ref('settings/audio').update(updates);
         showNotification('Track deleted.', 'success');
     } catch (e) {
         showNotification('Error deleting track: ' + e.message, 'error');
@@ -5057,28 +5248,49 @@ async function deleteTrack(trackId) {
 }
 
 function renderMusicPlaylist() {
-    const container = document.getElementById('musicPlaylist');
-    if (!container) return;
+    const dashboardContainer = document.getElementById('musicPlaylist');
+    const popupContainer = document.getElementById('popupMusicPlaylist');
 
-    if (Object.keys(audioLibrary).length === 0) {
-        container.innerHTML = `<p style="text-align: center; color: var(--muted-color-dash); padding: 1rem;">No music uploaded. Use the controls above.</p>`;
-        return;
-    }
-    
-    container.innerHTML = Object.values(audioLibrary).map(track => `
-        <div class="playlist-item" style="background-color: ${track.id === currentTrackId ? 'var(--accent-color-dash)' : 'transparent'};">
-            <div class="playlist-item-name">${track.name}</div>
-            <div class="playlist-item-actions">
-                <button title="Play this track for everyone" onclick="playTrack('${track.id}')"><i class="fas fa-play-circle"></i></button>
-                <button title="Delete this track" onclick="deleteTrack('${track.id}')"><i class="fas fa-trash-alt"></i></button>
+    const renderTo = (container) => {
+        if (!container) return;
+        if (Object.keys(audioLibrary).length === 0) {
+            container.innerHTML = `<p style="text-align: center; color: var(--muted-color-dash); padding: 1rem;">No music uploaded. Use the controls to add songs.</p>`;
+            return;
+        }
+        
+        container.innerHTML = Object.values(audioLibrary).map(track => `
+            <div class="playlist-item ${track.id === currentTrackId ? 'playing' : ''}">
+                <div class="playlist-item-name">${track.name}</div>
+                <div class="playlist-item-actions">
+                    <button title="Play this track for everyone" onclick="playTrack('${track.id}')"><i class="fas fa-play-circle"></i></button>
+                    <button title="Delete this track" onclick="deleteTrack('${track.id}')"><i class="fas fa-trash-alt"></i></button>
+                </div>
             </div>
-        </div>
-    `).join('');
+        `).join('');
+    };
+
+    renderTo(dashboardContainer);
+    renderTo(popupContainer);
 }
+
 
 function toggleBgMusic() {
     const state = document.getElementById('bgMusicState').value;
-    db.ref('settings/audio/musicState').set(state)
+    const updates = {
+        musicState: state
+    };
+    if (state === 'on' && !currentTrackId && Object.keys(audioLibrary).length > 0) {
+        // If turning on and no track is selected, play the first one
+        const firstTrackId = Object.keys(audioLibrary)[0];
+        updates.currentTrackId = firstTrackId;
+        updates.playbackStartTime = firebase.database.ServerValue.TIMESTAMP;
+    } else if (state === 'on') {
+        updates.playbackStartTime = firebase.database.ServerValue.TIMESTAMP;
+    }
+    else {
+        updates.playbackStartTime = null;
+    }
+    db.ref('settings/audio').update(updates)
         .then(() => showNotification(`Background music turned ${state.toUpperCase()}.`, 'info'))
         .catch(e => showNotification('Error updating music state: ' + e.message, 'error'));
 }
@@ -5108,13 +5320,18 @@ async function toggleMic() {
             mediaRecorder.ondataavailable = event => {
                 if (event.data.size > 0) {
                     const reader = new FileReader();
-                    reader.onload = () => db.ref('settings/audio/liveAnnouncement/audioChunk').set(reader.result);
+                    reader.onload = () => {
+                        db.ref('settings/audio/liveAnnouncement').update({
+                           audioChunk: reader.result,
+                           timestamp: firebase.database.ServerValue.TIMESTAMP 
+                        });
+                    };
                     reader.readAsDataURL(event.data);
                 }
             };
             
-            mediaRecorder.onstart = () => db.ref('settings/audio/liveAnnouncement').set({ isLive: true, timestamp: firebase.database.ServerValue.TIMESTAMP });
-            mediaRecorder.start(2000); // Chunk every 2 seconds
+            mediaRecorder.onstart = () => db.ref('settings/audio/liveAnnouncement').set({ isLive: true, isNewStream: true, timestamp: firebase.database.ServerValue.TIMESTAMP });
+            mediaRecorder.start(1500); // Chunk every 1.5 seconds
 
             document.getElementById('micToggleBtn').classList.add('live');
             document.getElementById('micToggleBtn').innerHTML = '<i class="fas fa-microphone"></i> Mic is LIVE';
@@ -5132,6 +5349,7 @@ function handleBackgroundMusicState(audioData) {
     const playlistMode = audioData.playlistMode || 'off';
     const trackId = audioData.currentTrackId;
     const track = trackId ? audioData.musicLibrary?.[trackId] : null;
+    const playbackStartTime = audioData.playbackStartTime || 0;
 
     if (document.getElementById('bgMusicState')) {
         document.getElementById('bgMusicState').value = musicState;
@@ -5142,26 +5360,122 @@ function handleBackgroundMusicState(audioData) {
 
     backgroundMusicPlayer.loop = (playlistMode === 'off');
 
-    if (musicState === 'on' && track && track.url) {
-        if (backgroundMusicPlayer.src !== track.url) {
+    if (musicState === 'on' && track && track.url && playbackStartTime > 0) {
+        const hasSourceChanged = backgroundMusicPlayer.src !== track.url;
+        if (hasSourceChanged) {
             backgroundMusicPlayer.src = track.url;
         }
-        if (backgroundMusicPlayer.paused) {
-            backgroundMusicPlayer.play().catch(e => {});
+
+        const serverTime = getEstimatedServerTime();
+        const elapsedTime = (serverTime - playbackStartTime) / 1000;
+        
+        const seekAndPlay = () => {
+            if (Math.abs(backgroundMusicPlayer.currentTime - elapsedTime) > 1.5) { 
+                 backgroundMusicPlayer.currentTime = elapsedTime % backgroundMusicPlayer.duration;
+            }
+             if (backgroundMusicPlayer.paused) {
+                 backgroundMusicPlayer.play().catch(e => {});
+             }
+        };
+
+        if(backgroundMusicPlayer.readyState >= 2) { // HAVE_CURRENT_DATA
+            seekAndPlay();
+        } else {
+            backgroundMusicPlayer.addEventListener('canplay', seekAndPlay, { once: true });
         }
+
     } else {
-        backgroundMusicPlayer.pause();
+        if (!backgroundMusicPlayer.paused) {
+            backgroundMusicPlayer.pause();
+        }
     }
 }
 
-function handleLiveAudioState(audioData) {
+
+function handleLiveAudioStream(audioData) {
     const liveInfo = audioData.liveAnnouncement;
-    if (liveInfo && liveInfo.isLive && liveInfo.audioChunk) {
-        // Use a simple mechanism to prevent re-playing the same chunk
-        if (liveAudioPlayer.src !== liveInfo.audioChunk) {
-            liveAudioPlayer.src = liveInfo.audioChunk;
+    if (liveInfo && liveInfo.isLive && liveInfo.audioChunk && liveInfo.timestamp > lastProcessedTimestamp) {
+        
+        if (liveInfo.isNewStream && mediaSource && mediaSource.readyState === 'open') {
+             console.log("New live stream detected, resetting buffer.");
+             audioQueue = [];
+             if (sourceBuffer && !sourceBuffer.updating) {
+                try {
+                    sourceBuffer.remove(0, sourceBuffer.buffered.length > 0 ? sourceBuffer.buffered.end(0) : 0);
+                } catch(e) { console.warn("Buffer clear failed, might be empty", e); }
+             }
+             db.ref('settings/audio/liveAnnouncement/isNewStream').set(null); // Mark as processed
+        }
+
+        lastProcessedTimestamp = liveInfo.timestamp;
+        
+        if (liveAudioPlayer.paused) {
             liveAudioPlayer.play().catch(e => {});
         }
+        
+        audioQueue.push(liveInfo.audioChunk);
+        processAudioQueue();
+    } else if (liveInfo && !liveInfo.isLive) {
+        // If live stream is off, fade out the audio
+        let vol = liveAudioPlayer.volume;
+        if (vol > 0) {
+            const fadeOutInterval = setInterval(() => {
+                vol -= 0.1;
+                if (vol <= 0) {
+                    liveAudioPlayer.volume = 0;
+                    liveAudioPlayer.pause();
+                    liveAudioPlayer.volume = 1; // Reset for next time
+                    clearInterval(fadeOutInterval);
+                } else {
+                    liveAudioPlayer.volume = vol;
+                }
+            }, 50);
+        }
+    }
+}
+
+async function processAudioQueue() {
+    if (isAppending || audioQueue.length === 0 || !sourceBuffer || sourceBuffer.updating) {
+        return;
+    }
+    isAppending = true;
+    
+    const dataUrl = audioQueue.shift();
+    try {
+        const response = await fetch(dataUrl);
+        const arrayBuffer = await response.arrayBuffer();
+        sourceBuffer.appendBuffer(arrayBuffer);
+    } catch (error) {
+        console.error('Error processing audio chunk:', error);
+        isAppending = false; 
+    }
+}
+
+function initializeMediaSource() {
+    if ('MediaSource' in window) {
+        mediaSource = new MediaSource();
+        liveAudioPlayer.src = URL.createObjectURL(mediaSource);
+
+        mediaSource.addEventListener('sourceopen', () => {
+            try {
+                const mimeCodec = 'audio/webm; codecs="opus"';
+                if (MediaSource.isTypeSupported(mimeCodec)) {
+                    sourceBuffer = mediaSource.addSourceBuffer(mimeCodec);
+                    sourceBuffer.addEventListener('updateend', () => {
+                        isAppending = false;
+                        processAudioQueue(); 
+                    });
+                    isMediaSourceOpen = true;
+                } else {
+                    console.error('Unsupported MIME type:', mimeCodec);
+                }
+            } catch (e) {
+                console.error('Exception while creating SourceBuffer:', e);
+            }
+        });
+    } else {
+        console.error('MediaSource API not supported in this browser.');
+        showNotification('Live audio streaming may not work on this browser.', 'error');
     }
 }
 
@@ -5181,6 +5495,9 @@ function playNextInPlaylist() {
 document.addEventListener('DOMContentLoaded', () => {
     backgroundMusicPlayer = document.getElementById('backgroundMusicPlayer');
     liveAudioPlayer = document.getElementById('liveAudioPlayer');
+    
+    initializeMediaSource();
+
     document.getElementById('micToggleBtn').addEventListener('click', toggleMic);
     document.getElementById('musicUploadBtn').addEventListener('click', handleMusicUpload);
     document.getElementById('setStreamingUrlBtn').addEventListener('click', handleStreamingUrl);
@@ -5203,7 +5520,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </script>
 
-	<script>
+<script>
 (function(){
     function _0x1a3c(_0x12, _0x34){return _0x1a3c=_0x34?function(_0x56){return _0x56.toString(36)}:function(_0x56){return _0x56};return _0x1a3c(_0x12,_0x34);}
     document['addEventListener']('contextmenu',function(_0x1){_0x1['preventDefault']();});
@@ -5215,7 +5532,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 })();
-	</script>
+</script>
 
 </body>
 </html>
